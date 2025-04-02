@@ -41,8 +41,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('cargos', App\Http\Controllers\CargoController::class);
-
+    Route::get('cargos', [cargoController::class, 'index'])->name('cargos.index');
+    Route::post('cargos', [cargoController::class, 'store'])->name('cargos.store');
+    Route::patch('cargos/{cargo}', [cargoController::class, 'update'])->name('cargos.update');
+    Route::delete('cargos/{cargo}', [cargoController::class, 'destroy'])->name('cargos.destroy');
 });
 
 require __DIR__.'/auth.php';

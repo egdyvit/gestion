@@ -32,7 +32,14 @@ class CargoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|max:50',
+            'descripcion' => 'required|max:100'
+        ]);
+
+        $cargo = new Cargo($request->input());
+        $cargo->save();
+        return redirect('cargos');
     }
 
     /**
@@ -48,7 +55,7 @@ class CargoController extends Controller
      */
     public function edit(Cargo $cargo)
     {
-        //
+
     }
 
     /**
@@ -56,7 +63,15 @@ class CargoController extends Controller
      */
     public function update(Request $request, Cargo $cargo)
     {
-        //
+        // $request->validate([
+        //     'nombre' => 'required|max:50',
+        //     'descripcion' => 'required|max:100'
+        // ]);
+        // $cargo =new Cargo($request->input());
+        // $cargo->update($request->input());
+        $data = $request->all();
+        $cargo ->update($data);
+        return redirect('cargos');
     }
 
     /**
@@ -64,6 +79,7 @@ class CargoController extends Controller
      */
     public function destroy(Cargo $cargo)
     {
-        //
+        $cargo->delete();
+        return redirect('cargos');
     }
 }
