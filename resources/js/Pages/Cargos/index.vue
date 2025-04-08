@@ -34,7 +34,7 @@
         <div class="overflow-x-auto w-full">
           <table class="w-full whitespace-no-wrap">
             <thead>
-            <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
+            <tr class="text-xs font-semibold tracking-wide text-left text-white uppercase bg-blue-950 border-b">
                 <th class="px-4 py-3">#</th>
                 <th class="px-4 py-3">Nombre del Cargo</th>
               <th class="px-4 py-3">Descripción</th>
