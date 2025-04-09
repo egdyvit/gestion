@@ -3,6 +3,7 @@
 use App\Http\Controllers\CargoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProyectoController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -48,6 +49,12 @@ Route::middleware('auth')->group(function () {
     Route::post('cargos', [cargoController::class, 'store'])->name('cargos.store');
     Route::patch('cargos/{cargo}', [cargoController::class, 'update'])->name('cargos.update');
     Route::delete('cargos/{cargo}', [cargoController::class, 'destroy'])->name('cargos.destroy');
+
+    Route::get('proyectos', [ProyectoController::class, 'index'])->name('proyectos.index');
+    Route::get('proyectos/create', [ProyectoController::class, 'create'])->name('proyectos.create');
+    Route::post('proyectos/create', [ProyectoController::class, 'store'])->name('proyectos.store');
+    Route::patch('proyectos/{proyecto}', [ProyectoController::class, 'update'])->name('proyectos.update');
+    Route::delete('proyectos/{proyecto}', [ProyectoController::class, 'destroy'])->name('proyectos.destroy');
 });
 
 require __DIR__.'/auth.php';

@@ -10,12 +10,12 @@
       <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
         <div class="w-full">
           <h1 class="mb-4 text-xl font-semibold text-gray-700">
-            Create account
+            Registrar
           </h1>
 
           <form @submit.prevent="submit">
             <div>
-              <InputLabel for="name" value="Name" />
+              <InputLabel for="name" value="Nombre" />
               <TextInput id="name" type="text" class="block w-full mt-1" v-model="form.name" required autofocus autocomplete="name" />
               <InputError class="mt-2" :message="form.errors.name" />
             </div>
@@ -27,24 +27,24 @@
             </div>
 
             <div class="mt-4">
-              <InputLabel for="password" value="Password" />
+              <InputLabel for="password" value="Contraseña" />
               <TextInput id="password" type="password" class="block w-full mt-1" v-model="form.password" required autocomplete="new-password" />
               <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
             <div class="mt-4">
-              <InputLabel for="password_confirmation" value="Confirm Password" />
+              <InputLabel for="password_confirmation" value="Confirmar Contraseña" />
               <TextInput id="password_confirmation" type="password" class="block w-full mt-1" v-model="form.password_confirmation" required autocomplete="new-password" />
               <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
               <Link :href="route('login')" class="text-sm text-gray-600 underline  hover:text-gray-900">
-                Already registered?
+                ¿Ya estás registrado?
               </Link>
 
               <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Register
+                Registrar
               </PrimaryButton>
             </div>
           </form>

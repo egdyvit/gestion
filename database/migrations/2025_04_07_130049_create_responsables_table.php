@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\objetivos_especificos;
-use App\Models\Responsable;
+use App\Models\Cargo;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('actividades', function (Blueprint $table) {
+        Schema::create('responsables', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(objetivos_especificos::class)->constrained();
-            $table->foreignId('responsable_id')->constrained();
-            $table->text('descripcion', 100);
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(Cargo::class)->constrained();
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('actividades');
+        Schema::dropIfExists('responsables');
     }
 };

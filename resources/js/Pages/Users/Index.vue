@@ -1,9 +1,9 @@
 <template>
-  <Head title="Users"/>
+  <Head title="Usuarios"/>
 
   <AuthenticatedLayout>
   <template #header>
-    Users
+    Usuarios
   </template>
 
   <div class="p-4 bg-white rounded-lg shadow-xs">
@@ -17,8 +17,8 @@
 
       <div class="px-4 py-2 -mx-3">
         <div class="mx-3">
-          <span class="font-semibold text-blue-500">Info</span>
-          <p class="text-sm text-gray-600">Sample table page</p>
+          <span class="font-semibold text-blue-500">Información</span>
+          <p class="text-sm text-gray-600">Usuarios Registrados en el Sistema</p>
         </div>
       </div>
     </div>
@@ -27,9 +27,10 @@
       <div class="overflow-x-auto w-full">
         <table class="w-full whitespace-no-wrap">
           <thead>
-          <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
-            <th class="px-4 py-3">Name</th>
+          <tr class="text-xs font-semibold tracking-wide text-left text-white uppercase bg-blue-950 border-b">
+            <th class="px-4 py-3">Nombre</th>
             <th class="px-4 py-3">Email</th>
+            <th class="px-4 py-3">Fecha de Registro</th>
           </tr>
           </thead>
           <tbody class="bg-white divide-y">
@@ -39,6 +40,9 @@
             </td>
             <td class="px-4 py-3 text-sm">
               {{ user.email }}
+            </td>
+            <td class="px-4 py-3 text-sm">
+              {{ user.created_at }}
             </td>
           </tr>
           </tbody>

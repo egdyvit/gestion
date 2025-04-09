@@ -1,15 +1,17 @@
 <template>
-    <Head title="Cargos"/>
+    <Head title="Proyectos"/>
 
     <AuthenticatedLayout>
     <template #header>
     <div class="flex items-center gap-8">
-    Cargos
-      <DarkButton @click="openModalForm(1)">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+    Proyectos
+    <div class="rounded-lg border border-transparent bg-blue-500 px-2 py-2 text-center text-sm font-medium text-white transition-colors duration-150 hover:bg-blue-400 focus:outline-none focus:ring active:bg-gray-700">
+        <NavLink :href="route('proyectos.create')">
+            <template #icon><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-        </svg>
-</DarkButton>
+        </svg></template>Crear
+        </NavLink>
+     </div>
 </div>
     </template>
 
@@ -36,32 +38,32 @@
             <thead>
             <tr class="text-xs font-semibold tracking-wide text-left text-white uppercase bg-blue-950 border-b">
                 <th class="px-4 py-3">#</th>
-                <th class="px-4 py-3">Nombre del Cargo</th>
+                <th class="px-4 py-3">Nombre del Proyecto</th>
               <th class="px-4 py-3">Descripción</th>
               <th class="px-4 py-3">Actualizar</th>
               <th class="px-4 py-3">Borrar</th>
             </tr>
             </thead>
             <tbody class="bg-white divide-y">
-            <tr v-for="cargo,i in cargos.data" :key="cargo.id" class="text-gray-700">
+            <tr v-for="proyecto,i in proyectos.data" :key="proyecto.id" class="text-gray-700">
                 <td class="px-4 py-3 text-sm">
                 {{ (i+1) }}
               </td>
               <td class="px-4 py-3 text-sm">
-                {{ cargo.nombre }}
+                {{ proyecto.nombre }}
               </td>
               <td class="px-4 py-3 text-sm">
-                {{ cargo.descripcion }}
+                {{ proyecto.descripcion }}
               </td>
               <td class="px-4 py-3 text-sm">
-                <WarningButton @click="openModalForm(2,cargo)">
+                <WarningButton @click="openModalForm(2,proyecto)">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                     </svg>
                 </WarningButton>
               </td>
               <td class="px-4 py-3 text-sm">
-                <DangerButton @click="openModalDel(cargo)">
+                <DangerButton @click="openModalDel(proyecto)">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                 </svg>
@@ -73,7 +75,7 @@
         </div>
         <div
             class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase bg-gray-50 border-t sm:grid-cols-9">
-          <pagination :links="cargos.links" />
+          <pagination :links="proyectos.links" />
         </div>
       </div>
     </div>
@@ -82,13 +84,13 @@
         <div class=""p-6>
             <h2 class="m-6 flex justify-center text-lg font-medium text-gray-900">{{  title }}</h2>
             <div class="m-6 flex justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-            </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
+                </svg>
             </div>
 
             <div class="m-6 mb-6 space-y-6 max-w-xl">
-                <InputGroup :text="'Nombre del Cargo'" :required="'required'" v-model="form.nombre" :type="'text'">
+                <InputGroup :text="'Nombre del Proyecto'" :required="'required'" v-model="form.nombre" :type="'text'">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
                     </svg>
@@ -96,13 +98,46 @@
                 <InputError class="mt-1" :message="form.errors.nombre">
                 </InputError>
 
-                <InputGroup :text="'Descripción del Cargo'" :required="'required'" v-model="form.descripcion" :type="'text'">
+                <InputGroup :text="'Descripción del Proyecto'" :required="'required'" v-model="form.descripcion" :type="'text'">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z" />
                     </svg>
 
                 </InputGroup>
                 <InputError class="mt-1" :message="form.errors.descripcion">
+                </InputError>
+                <InputGroup :text="'Fecha de Inicio del Proyecto'" :required="'required'" v-model="form.fecha_inicio" :type="'text'">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z" />
+                    </svg>
+
+                </InputGroup>
+                <InputError class="mt-1" :message="form.errors.fecha_inicio">
+                </InputError>
+
+                <InputGroup :text="'Fecha Fin del Proyecto'" :required="'required'" v-model="form.fecha_fin" :type="'text'">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z" />
+                    </svg>
+
+                </InputGroup>
+                <InputError class="mt-1" :message="form.errors.fecha_fin">
+                </InputError>
+                <InputGroup :text="'Responsable del Proyecto'" :required="'required'" v-model="form.responsable" :type="'text'">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z" />
+                    </svg>
+
+                </InputGroup>
+                <InputError class="mt-1" :message="form.errors.responsable">
+                </InputError>
+                <InputGroup :text="'Estado del Proyecto'" :required="'required'" v-model="form.estado" :type="'text'">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z" />
+                    </svg>
+
+                </InputGroup>
+                <InputError class="mt-1" :message="form.errors.estado">
                 </InputError>
                 <PrimaryButton @click="save">
                     Guardar
@@ -123,11 +158,11 @@
         <div class="flex justify-center p-6">
             <p  class="text-2xl text-gray-600"> ¿Estás seguro de eliminar
             <span class="text-2xl font-medium text-gray-700">{{ v.nombre }}
-            </span> de la lista de Cargos?</p>
+            </span> de la lista de Proyectos?</p>
             <br>
         </div>
         <div class="m-6 flex justify-center">
-            <PrimaryButton @click="deleteCargo">
+            <PrimaryButton @click="deleteProyecto">
                 Si, Eliminar.
             </PrimaryButton>
         </div>
@@ -152,8 +187,9 @@ import {ref} from 'vue';
 import InputGroup from '@/Components/InputGroup.vue';
 import SelectInput from '@/Components/SelectInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import NavLink from '@/Components/NavLink.vue';
   const props = defineProps({
-      cargos: Object
+      proyectos: Object
   });
 
   const form = useForm({
@@ -173,26 +209,26 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
   const msj = ref('');
   const classMsj = ref('hidden');
 
-  const openModalForm = (op,cargo) =>{
+  const openModalForm = (op,proyecto) =>{
 
     showModalForm.value = true;
     operation.value = op;
     if(op ===1){
-        title.value = 'Crear Cargo';
+        title.value = 'Crear Proyecto';
         console.log(title.value);
     }
     else {
-        title.value = 'Editar Cargo';
+        title.value = 'Editar Proyecto';
         console.log(title.value);
-        form.nombre = cargo.nombre;
-        form.descripcion = cargo.descripcion;
-        v.value.id = cargo.id;
+        form.nombre = proyecto.nombre;
+        form.descripcion = proyecto.descripcion;
+        v.value.id = proyecto.id;
     }
   }
-  const openModalDel = (cargo) =>{
+  const openModalDel = (proyecto) =>{
     showModalDel.value = true;
-    v.value.id = cargo.id;
-    v.value.nombre = cargo.nombre
+    v.value.id = proyecto.id;
+    v.value.nombre = proyecto.nombre
   }
   const closeModalForm = () =>{
     showModalForm.value = false;
@@ -203,16 +239,16 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
   }
   const save = () => {
     if(operation.value === 1){
-        form.post(route('cargos.store'),{
-            onSuccess: () =>{ok('Cargo Creado')}
+        form.post(route('proyectos.store'),{
+            onSuccess: () =>{ok('Proyecto Creado')}
         }
         );
         form.reset();
         closeModalForm();
     }
     else {
-        form.patch(route('cargos.update',v.value.id),{
-            onSuccess: () =>{ok('Cargo Actualizado')}
+        form.patch(route('proyectos.update',v.value.id),{
+            onSuccess: () =>{ok('Proyecto Actualizado')}
         });
         form.reset();
     }
@@ -226,9 +262,9 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
     msj.value = m;
     classMsj.value = 'block';
   }
-  const deleteCargo = () => {
-    form.delete(route('cargos.destroy',v.value.id),{
-        onSuccess: () => { ok('Cargo Eliminado')}
+  const deleteProyecto = () => {
+    form.delete(route('proyectos.destroy',v.value.id),{
+        onSuccess: () => { ok('Proyecto Eliminado')}
     })
   }
 </script>

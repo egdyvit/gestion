@@ -33,7 +33,7 @@ class CargoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|max:50',
+            'nombre' => 'required|max:50|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/',
             'descripcion' => 'required|max:100'
         ]);
 
