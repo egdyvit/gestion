@@ -53,7 +53,7 @@
                     Proyectos Cargados
                   </p>
                   <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                    376
+                    {{ proyectos }}
                   </p>
                 </div>
               </div>
@@ -85,6 +85,7 @@ import { Head } from '@inertiajs/vue3';
 
 const props = defineProps({
    usuarios: {type:Number},
-   cargos: {type:Number}
+   cargos: {type:Number},
+   proyectos: {type:Number}
 });
 </script>
