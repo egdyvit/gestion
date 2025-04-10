@@ -33,7 +33,8 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard', [
         'usuarios' => App\Models\User::count(),
         'cargos' => App\Models\Cargo::count(),
-        'proyectos' => App\Models\Proyecto::count()
+        'proyectos' => App\Models\Proyecto::count(),
+        'proyectosf' => App\Models\Proyecto::where('estado', 'finalizado')->count()
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
