@@ -39,7 +39,7 @@
             <tr class="text-xs font-semibold tracking-wide text-left text-white uppercase bg-blue-950 border-b">
                 <th class="px-4 py-3">#</th>
                 <th class="px-4 py-3">Nombre del Proyecto</th>
-              <th class="px-4 py-3">Descripción</th>
+              <th class="px-4 py-3">Estado</th>
               <th class="px-4 py-3">Actualizar</th>
               <th class="px-4 py-3">Borrar</th>
             </tr>
@@ -53,7 +53,7 @@
                 {{ proyecto.nombre }}
               </td>
               <td class="px-4 py-3 text-sm">
-                {{ proyecto.descripcion }}
+                {{ proyecto.estado }}
               </td>
               <td class="px-4 py-3 text-sm">
                 <WarningButton @click="openModalForm(2,proyecto)">
