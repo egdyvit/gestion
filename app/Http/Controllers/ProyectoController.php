@@ -33,8 +33,13 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre' => 'required|max:100|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/',
+      $data = $request->all();
+        Proyecto::create($data);
+        return redirect('proyectos');
+
+
+        /*$request->validate([
+            'nombre' => 'required|max:100',
             'descripcion' => 'required|max:500',
             'fecha_inicio' => 'required|date',
             'fecha_fin' => 'required|date',
@@ -47,7 +52,7 @@ class ProyectoController extends Controller
 
         $proyecto = new Proyecto($request->input());
         $proyecto->save();
-        return redirect('proyectos');
+        return redirect('proyectos');*/
     }
 
     /**
